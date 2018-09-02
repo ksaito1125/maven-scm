@@ -127,10 +127,20 @@
   </ciManagement>
 
   <distributionManagement>
-    <site>
-      <id>apache.website</id>
-      <url>scm:svn:https://svn.apache.org/repos/infra/websites/production/maven/components/${maven.site.path}</url>
-    </site>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>s3-maven-release</id>
+      <name>AWS Release Repository</name>
+      <url>s3://ksaito-maven/release</url>
+      <layout>default</layout>
+    </repository>
+    <snapshotRepository>
+      <uniqueVersion>true</uniqueVersion>
+      <id>s3-maven-snapshot</id>
+      <name>AWS Snapshot Repository</name>
+      <url>s3://ksaito-maven/snapshot</url>
+      <layout>default</layout>
+    </snapshotRepository>
   </distributionManagement>
 
   <properties>
@@ -457,6 +467,13 @@
       </plugin>
     </plugins>
 
+    <extensions>
+      <extension>
+	<groupId>org.springframework.build</groupId>
+	<artifactId>aws-maven</artifactId>
+	<version>5.0.0.RELEASE</version>
+      </extension>
+    </extensions>
   </build>
 
   <contributors>
